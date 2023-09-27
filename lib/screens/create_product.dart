@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nft/constants/app.colors.dart';
 
@@ -29,7 +30,7 @@ class _CreateProductState extends State<CreateProduct> {
             : AppColors.black2,
         appBar: AppBar(
           title: Text(
-            'Create NFT',
+            'Create an Product'.tr,
             style: GoogleFonts.roboto(
                 color: Theme.of(context).brightness == Brightness.light
                     ? Colors.black
@@ -104,7 +105,7 @@ class _CreateProductState extends State<CreateProduct> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Create an NFT',
+                        'Create an Product'.tr,
                         style: GoogleFonts.roboto(
                             fontSize: 20.sp, fontWeight: FontWeight.bold),
                       ),
@@ -112,7 +113,7 @@ class _CreateProductState extends State<CreateProduct> {
                         height: 16.h,
                       ),
                       Text(
-                        'Import image, video or audio',
+                        'Import image, video or audio'.tr,
                         style: GoogleFonts.roboto(
                             fontSize: 16.sp, fontWeight: FontWeight.bold),
                       ),
@@ -120,7 +121,7 @@ class _CreateProductState extends State<CreateProduct> {
                         height: 16.h,
                       ),
                       Text(
-                        'File types supported: JPGM PNG, IF, SVG, MP3, WAV, MP4, MAX size 50 MB',
+                        'File types supported: JPGM PNG, IF, SVG, MP3, WAV, MP4, MAX size 50 MB'.tr,
                         style: GoogleFonts.roboto(
                             fontSize: 14.sp, color: AppColors.grey2),
                       ),
@@ -168,7 +169,7 @@ class _CreateProductState extends State<CreateProduct> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Name',style: GoogleFonts.roboto(
+                              Text('Name'.tr,style: GoogleFonts.roboto(
                                 color: Theme.of(context).brightness == Brightness.light
                                     ? AppColors.black
                                     : Colors.grey.shade100
@@ -222,14 +223,14 @@ class _CreateProductState extends State<CreateProduct> {
                     keyboardType: TextInputType.text,
                     maxLines: 5,
                     decoration: InputDecoration(
-                        hintText: "Enter a description here...",
+                        hintText: "Enter a description here...".tr,
                         label: SizedBox(
                           width: 120.w,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Description',style: GoogleFonts.roboto(
+                              Text('Description'.tr,style: GoogleFonts.roboto(
                               color: Theme.of(context).brightness == Brightness.light
                                   ? AppColors.black
                                   : Colors.grey.shade100)),
@@ -283,7 +284,7 @@ class _CreateProductState extends State<CreateProduct> {
                     child: Container(
                       child: InputDecorator(
                         decoration: InputDecoration(
-                          labelText: 'Network',labelStyle: GoogleFonts.roboto(
+                          labelText: 'Network'.tr,labelStyle: GoogleFonts.roboto(
                           color: Theme.of(context).brightness == Brightness.light
                               ? AppColors.black
                               : Colors.grey.shade100
@@ -348,16 +349,16 @@ class _CreateProductState extends State<CreateProduct> {
                     text: TextSpan(style: defaultStyle, children: <TextSpan>[
                       TextSpan(
                         text:
-                            'The network of item should be same as the collection’s. For more details, check ',
+                            'The network of item should be same as the collection’s. For more details, check '.tr,
                       ),
-                      TextSpan(style: linkStyle, text: 'here '),
+                      TextSpan(style: linkStyle, text: 'here '.tr),
                     ]),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    'Collection',
+                    'Collection'.tr,
                     style: GoogleFonts.roboto(
                         fontWeight: FontWeight.bold, fontSize: 20.sp),
                   ),
@@ -370,7 +371,7 @@ class _CreateProductState extends State<CreateProduct> {
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Text(
-                        '+ Create new collection',
+                        '+ Create new collection'.tr,
                         style: GoogleFonts.roboto(
                           fontSize: 18.sp,
                           color: AppColors.purple,
@@ -389,17 +390,17 @@ class _CreateProductState extends State<CreateProduct> {
                     text: TextSpan(style: defaultStyle, children: <TextSpan>[
                       TextSpan(
                         text:
-                            'Select a collection for this item. Once selected and minted, it cannot be modified. If you do not have one, please ',
+                            'Select a collection for this item. Once selected and minted, it cannot be modified. If you do not have one, please '.tr,
                       ),
                       TextSpan(
-                          style: linkStyle, text: 'create a new collection. '),
+                          style: linkStyle, text: 'create a new collection '.tr),
                     ]),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    'Properties',
+                    'Properties'.tr,
                     style: GoogleFonts.roboto(
                         fontWeight: FontWeight.bold, fontSize: 20.sp),
                   ),
@@ -441,16 +442,16 @@ class _CreateProductState extends State<CreateProduct> {
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
                     children: [
-                      Text('Fee',
+                      Text('Fee'.tr,
                           style: GoogleFonts.roboto(
-                              fontSize: 20.sp, fontWeight: FontWeight.bold)),
+                              fontSize: 15.sp, fontWeight: FontWeight.bold)),
                       SizedBox(
                         width: 120.w,
                       ),
                       ElevatedButton(
                         onPressed: () {},
                         child: Text(
-                          'estimate',
+                          'estimate'.tr,
                           style: GoogleFonts.roboto(
                               fontSize: 12.sp, color: Colors.black),
                         ),
@@ -482,7 +483,7 @@ class _CreateProductState extends State<CreateProduct> {
                         onChanged: (value) {},
                       ),
                       Text(
-                          'I understand and agree to BNB NFT’s \nMinting Rules and terms ')
+                          'I understand and agree to the rules and\n conditions here'.tr)
                     ],
                   ),
                 ),
@@ -496,7 +497,7 @@ class _CreateProductState extends State<CreateProduct> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Fee:',
+                          Text('Fee'.tr,
                               style: GoogleFonts.roboto(
                                 fontSize: 16.sp,
                               )),
@@ -526,7 +527,7 @@ class _CreateProductState extends State<CreateProduct> {
                         child: ElevatedButton(
                           onPressed: () {},
                           child: Text(
-                            'Create',
+                            'Create'.tr,
                             style: GoogleFonts.roboto(
                                 fontSize: 16.sp,
                               color: Theme.of(context).brightness == Brightness.light

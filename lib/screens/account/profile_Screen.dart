@@ -146,11 +146,11 @@ class _ProfileScreenState extends State<ProfileScreen>with SingleTickerProviderS
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ButtonProfileWidget(name: 'Follow',
+              ButtonProfileWidget(name: 'Follow'.tr,
                   onTap: (){},
                   nameColorBorder: Colors.black,
                   BackgroundColor: Colors.white),
-              ButtonProfileWidget(name: 'Message',
+              ButtonProfileWidget(name: 'Message'.tr,
                   onTap: (){},
                   nameColorBorder: Colors.white,
                   BackgroundColor: Colors.black),
@@ -180,17 +180,17 @@ class _ProfileScreenState extends State<ProfileScreen>with SingleTickerProviderS
               indicatorWeight: 4,
               tabs: [
                 Tab(
-                  text: 'Created',
+                  text: 'Created'.tr,
 
                 ),
                 Tab(
-                  text: 'Owned',
+                  text: 'Owned'.tr,
                 ),
                 Tab(
-                  text: 'Collections',
+                  text: 'Collections'.tr,
                 ),
                 Tab(
-                  text: 'Splits',
+                  text: 'Splits'.tr,
                 ),
               ]),
           SizedBox(

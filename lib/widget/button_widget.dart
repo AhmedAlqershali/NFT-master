@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nft/constants/app.colors.dart';
 
 class ButtonWidget extends StatelessWidget {
   String name;
@@ -22,10 +23,16 @@ class ButtonWidget extends StatelessWidget {
           onPressed: onPressed,
           child: Text(
             name,
-            style: TextStyle(fontSize: 18.sp),
+            style: TextStyle(fontSize: 18.sp,color: Theme.of(context).brightness == Brightness.light
+                ? AppColors.white
+                : AppColors.black,
+            fontWeight: FontWeight.bold
+            ),
           ),
           style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF191B23),
+              backgroundColor:Theme.of(context).brightness == Brightness.light
+                  ? AppColors.black
+                  : AppColors.white,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.r))),
         ),

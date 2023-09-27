@@ -27,7 +27,7 @@ class _CartScreenState extends State<CartScreen> {
           : AppColors.black2,
     appBar: AppBar(
         title: Text(
-          'Cart',
+          'Cart'.tr,
           style: GoogleFonts.roboto(color: Theme.of(context).brightness == Brightness.light
               ? AppColors.black
               : AppColors.white,
@@ -90,17 +90,14 @@ class _CartScreenState extends State<CartScreen> {
           )
         ],
       ),
-      body: Column(
+      body: ListView(
         children: [
-          SizedBox(
-            height: 10.h,
-          ),
           Padding(
-            padding: EdgeInsets.only(left: 24.w),
+            padding: EdgeInsets.only(left: 24.w,right: 24.w),
             child: Row(
               children: [
                 Text(
-                  'Cart',
+                  'Cart'.tr,
                   style: GoogleFonts.roboto(
                       fontSize: 20.sp, fontWeight: FontWeight.w700),
                 ),
@@ -114,9 +111,10 @@ class _CartScreenState extends State<CartScreen> {
             ),
           ),
           SizedBox(
-            height: 14.h,
+            height: 10.h,
           ),
           ListView.separated(
+            physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) => Padding(
                     padding: EdgeInsets.only(left: 24.w, right: 24.w),
@@ -272,9 +270,9 @@ class _CartScreenState extends State<CartScreen> {
               separatorBuilder: (context, index) => SizedBox(
                     height: 10.h,
                   ),
-              itemCount: 3),
+              itemCount: 10),
           SizedBox(
-            height: 15.h,
+            height: 14.h,
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -283,7 +281,7 @@ class _CartScreenState extends State<CartScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Original price',
+                    Text('Original price'.tr,
                         style: GoogleFonts.roboto(
                             color: Theme.of(context).brightness == Brightness.light
                                 ? AppColors.black
@@ -313,23 +311,18 @@ class _CartScreenState extends State<CartScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: 16.h,
+                  height: 14.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Text('VAT',
-                            style: GoogleFonts.roboto(
-                                color:  Theme.of(context).brightness == Brightness.light
-                                    ? AppColors.black
-                                    : AppColors.white,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16.sp)),
-                        Text('(Czech Republic)'),
-                      ],
-                    ),
+                    Text('VAT'.tr,
+                        style: GoogleFonts.roboto(
+                            color:  Theme.of(context).brightness == Brightness.light
+                                ? AppColors.black
+                                : AppColors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16.sp)),
                     Row(
                       children: [
                         Image.asset(
@@ -353,12 +346,12 @@ class _CartScreenState extends State<CartScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: 16.h,
+                  height: 13.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Discounted price',
+                    Text('Discounted price'.tr,
                         style: GoogleFonts.roboto(
                             color: Theme.of(context).brightness == Brightness.light
                                 ? AppColors.black
@@ -397,7 +390,7 @@ class _CartScreenState extends State<CartScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ButtonProfileWidget(
-                  name: 'Checkout',
+                  name: 'Checkout'.tr,
                   onTap: () => Get.to(CheckoutScreen()),
                   nameColorBorder: AppColors.black2,
                   BackgroundColor: Colors.white),
@@ -412,7 +405,7 @@ class _CartScreenState extends State<CartScreen> {
                       border: Border.all(width: 2.w, color: Colors.white)),
                   alignment: Alignment.center,
                   child: Text(
-                    'Continue searching',
+                    'Continue searching'.tr,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.roboto(
                         fontWeight: FontWeight.w700,
@@ -422,6 +415,9 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               )
             ],
+          ),
+          SizedBox(
+            height: 6.h,
           ),
         ],
       ),

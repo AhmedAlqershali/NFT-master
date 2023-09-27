@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nft/constants/app.colors.dart';
 import 'package:nft/models/bn_item.dart';
@@ -69,7 +70,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         title: Text(
-          'Checkout',
+          'Checkout'.tr,
           style: GoogleFonts.roboto(
               color: Theme.of(context).brightness == Brightness.light
                     ? AppColors.black
@@ -153,22 +154,22 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     Padding(
                       padding: EdgeInsets.only(top: 5.h, left: 20.w, bottom: 5.h),
                       child: Text(
-                        '1.Add your personal info',
+                        '1.Add your personal info'.tr,
                         style: GoogleFonts.roboto(
                             fontSize: 26.sp,
                             color: AppColors.black,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    EditTextWidget(star: '',name: 'Name', size: 15, controller: _nameTextController),
-                    EditTextWidget(star: '',name: 'Last name', size: 15, controller: _nameTextController),
-                    EditTextWidget(star: '',name: 'Campany', size: 15, controller: _nameTextController),
+                    EditTextWidget(star: '',name: 'Name'.tr, size: 15, controller: _nameTextController),
+                    EditTextWidget(star: '',name: 'Last name'.tr, size: 15, controller: _nameTextController),
+                    EditTextWidget(star: '',name: 'Campany'.tr, size: 15, controller: _nameTextController),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: TextField(
                         controller: _nameTextController,
                         decoration: InputDecoration(
-                            labelText: 'Country',
+                            labelText: 'Country'.tr,
                             labelStyle: GoogleFonts.roboto(
                               color: Theme.of(context).brightness == Brightness.light
                                   ? AppColors.black
@@ -241,15 +242,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       children: [
                         SizedBox(
                             width: 190.w,
-                            child: EditTextWidget(star: '',name: 'City', size: 15, controller: _nameTextController)),
+                            child: EditTextWidget(star: '',name: 'City'.tr, size: 15, controller: _nameTextController)),
                         SizedBox(
                             width: 160.w,
-                            child: EditTextWidget(star: '',name: 'Postal code', size: 15, controller: _nameTextController)),
+                            child: EditTextWidget(star: '',name: 'Postal code'.tr, size: 15, controller: _nameTextController)),
 
                       ],
                     ),
-                    EditTextWidget(star: '',name: 'Street', size: 15, controller: _nameTextController),
-                    EditTextWidget(star: '',name: 'Vat', size: 15, controller: _nameTextController),
+                    EditTextWidget(star: '',name: 'Street'.tr, size: 15, controller: _nameTextController),
+                    EditTextWidget(star: '',name: 'VAT'.tr, size: 15, controller: _nameTextController),
                     Row(
                       children: [
                         Checkbox(
@@ -264,7 +265,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           },
                         ),
                         Text(
-                          'Other address to deliver',
+                          'Other address to deliver'.tr,
                           style: TextStyle(color: Theme.of(context).brightness == Brightness.light
                               ? AppColors.black
                               : Colors.grey.shade100),
@@ -280,7 +281,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Totla:',style: GoogleFonts.roboto(
+                              Text('Total:'.tr,style: GoogleFonts.roboto(
                                   color: Theme.of(context).brightness == Brightness.light
                                       ? AppColors.black
                                       : Colors.grey.shade100,
@@ -304,7 +305,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 ],)
                             ],
                           ),
-                          ButtonProfileWidget(name: 'Next', onTap:_incrementCustomStepper, nameColorBorder: Theme.of(context).brightness == Brightness.light
+                          ButtonProfileWidget(name: 'Next'.tr, onTap:_incrementCustomStepper, nameColorBorder: Theme.of(context).brightness == Brightness.light
                               ? Colors.grey.shade100
                               : AppColors.black,
                               BackgroundColor: Theme.of(context).brightness == Brightness.light
@@ -337,7 +338,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   Padding(
                     padding: EdgeInsets.only(top: 5.h, left: 20.w, bottom: 5.h),
                     child: Text(
-                      '1.Add your personal info',
+                      '2. Choose a delivery method'.tr,
                       style: GoogleFonts.roboto(
                           fontSize: 26.sp,
                           color: Theme.of(context).brightness == Brightness.light
@@ -400,7 +401,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           },
                           secondary:Text('+\$4.00') ,
                         ),
-                        EditTextWidget(star: '*',controller: _locationrController,name: 'Location',size: 20,),
+                        EditTextWidget(star: '*',controller: _locationrController,name: 'Location'.tr,size: 20,),
                       ],
                     ),
                   ),
@@ -414,7 +415,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Totla:',style: GoogleFonts.roboto(
+                            Text('Totla'.tr,style: GoogleFonts.roboto(
                                 color: Theme.of(context).brightness == Brightness.light
                                     ? Colors.black
                                     : AppColors.white,
@@ -438,7 +439,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               ],)
                           ],
                         ),
-                        ButtonProfileWidget(name: 'Next', onTap:_incrementCustomStepper, nameColorBorder: Colors.white, BackgroundColor: AppColors.black2)
+                        ButtonProfileWidget(name: 'Next'.tr, onTap:_incrementCustomStepper, nameColorBorder: Colors.white, BackgroundColor: AppColors.black2)
                       ],
                     ),
                   )
@@ -462,7 +463,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 Padding(
                   padding: EdgeInsets.only(top: 5.h, left: 20.w, bottom: 5.h),
                   child: Text(
-                    '3. Choose a payment method',
+                    '3. Choose a payment method'.tr,
                     style: GoogleFonts.roboto(
                         fontSize: 26.sp,
                         color:  Theme.of(context).brightness == Brightness.light
@@ -472,7 +473,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ),
                 ),
                 RadioListTile(
-                  title: Text('Credit Card',style: GoogleFonts.roboto(
+                  title: Text('Credit Card'.tr,style: GoogleFonts.roboto(
                     color: Theme.of(context).brightness == Brightness.light
                         ? AppColors.black
                         : Colors.grey.shade100
@@ -497,7 +498,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           padding:  EdgeInsets.only(left: 20.w),
                           child: SizedBox(
                             width: 130.w,
-                            child: Text('Credit Card',style: GoogleFonts.roboto(
+                            child: Text('Credit Card'.tr,style: GoogleFonts.roboto(
                               color: Theme.of(context).brightness == Brightness.light
                                   ? AppColors.black
                                   : Colors.grey.shade100,
@@ -673,7 +674,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
                 Padding(
                   padding:  EdgeInsets.only(left: 24.w,bottom: 24.h),
-                  child: Text('Summary',style: GoogleFonts.roboto(
+                  child: Text('Summary'.tr,style: GoogleFonts.roboto(
                       fontWeight: FontWeight.w700,
                       fontSize: 20.sp,
                     color: Theme.of(context).brightness == Brightness.light
@@ -688,7 +689,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Subtotal',style: GoogleFonts.roboto(
+                          Text('Subtotal'.tr,style: GoogleFonts.roboto(
                               color: Theme.of(context).brightness == Brightness.light
                                   ? AppColors.black
                                   : Colors.grey.shade100,
@@ -722,7 +723,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Delivery',style: GoogleFonts.roboto(
+                          Text('Delivery'.tr,style: GoogleFonts.roboto(
                               color: Theme.of(context).brightness == Brightness.light
                                   ? AppColors.black
                                   : Colors.grey.shade100,
@@ -755,22 +756,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Text('VAT',style: GoogleFonts.roboto(
-                                  color: Theme.of(context).brightness == Brightness.light
-                                      ? AppColors.black
-                                      : Colors.grey.shade100,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16.sp
-                              )),
-                              Text('(Czech Republic)',style: GoogleFonts.roboto(
-                                color: Theme.of(context).brightness == Brightness.light
-                                    ? AppColors.black
-                                    : Colors.grey.shade100
-                              ),),
-                            ],
-                          ),
+                          Text('VAT'.tr,style: GoogleFonts.roboto(
+                              color: Theme.of(context).brightness == Brightness.light
+                                  ? AppColors.black
+                                  : Colors.grey.shade100,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16.sp
+                          )),
                           Row(
                             children: [
                               Image.asset(
@@ -802,7 +794,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Discounted price',style: GoogleFonts.roboto(
+                      Text('Discounted price'.tr,style: GoogleFonts.roboto(
                           color: Theme.of(context).brightness == Brightness.light
                               ? AppColors.black
                               : Colors.grey.shade100,
@@ -843,7 +835,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Totla:',style: GoogleFonts.roboto(
+                          Text('Total:'.tr,style: GoogleFonts.roboto(
                               color: Theme.of(context).brightness == Brightness.light
                                   ? AppColors.black
                                   : Colors.grey.shade100,
@@ -867,7 +859,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             ],)
                         ],
                       ),
-                      ButtonProfileWidget(name: 'Pay Now', onTap:(){}, nameColorBorder: Colors.white, BackgroundColor: AppColors.black2)
+                      ButtonProfileWidget(name: 'Pay Now'.tr, onTap:(){}, nameColorBorder: Colors.white, BackgroundColor: AppColors.black2)
                     ],
                   ),
                 )

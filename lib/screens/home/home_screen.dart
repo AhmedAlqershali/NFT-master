@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen>
         automaticallyImplyLeading: true,
         backgroundColor:
         Theme.of(context).brightness == Brightness.light
-            ? AppColors.white
+            ? Colors.grey.shade100
             : AppColors.black2,
         elevation: 0,
         actions: [
@@ -161,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Favorites',style: GoogleFonts.roboto(
+                    Text('Favorites'.tr,style: GoogleFonts.roboto(
                       color:
                       Theme.of(context).brightness == Brightness.light
                           ? Colors.black
@@ -170,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen>
                     GestureDetector(
                       onTap: ()=>Get.to(FavoritesScreen()),
                       child: Row(
-                        children: [Text('See all',style: GoogleFonts.roboto(
+                        children: [Text('See all'.tr,style: GoogleFonts.roboto(
                           color:
                           Theme.of(context).brightness == Brightness.light
                               ? Colors.black
@@ -196,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen>
                       itemCount: 8,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: EdgeInsets.only(left: 18.w),
+                          padding: EdgeInsets.only(left: 18.w,right: 18.w),
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(18.r),
@@ -252,7 +252,7 @@ class _HomeScreenState extends State<HomeScreen>
 
 
                                 Padding(
-                                  padding: EdgeInsets.only(left: 16.w, top: 16.h),
+                                  padding: EdgeInsets.only(left: 16.w, top: 16.h,right: 16.h),
                                   child: Text(
                                     'Deadzone 13 Hideout',
                                     style: GoogleFonts.roboto(
@@ -260,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(left: 16.w, top: 16.w),
+                                  padding: EdgeInsets.only(left: 16.w, top: 16.w,right: 16.w),
                                   child: Row(
                                     children: [
                                       Image.asset(
@@ -279,7 +279,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(left: 16.w, top: 16.w),
+                                  padding: EdgeInsets.only(left: 16.w, top: 16.w,right: 16.w),
                                   child: Row(
                                     children: [
                                       Image.asset(
@@ -304,38 +304,33 @@ class _HomeScreenState extends State<HomeScreen>
                                           )),
                                         ],
                                       ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          left: 126.w,
-                                          right: 16.w,
-                                        ),
-                                        child: Container(
-                                          height: 36.h,
-                                          width: 64.w,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              color: Colors.grey.shade200),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    fav = !fav;
-                                                  });
-                                                },
-                                                child: fav
-                                                    ? Icon(Icons
-                                                        .favorite_border_outlined)
-                                                    : Icon(Icons.favorite),
-                                              ),
-                                              Text('34',style: GoogleFonts.roboto(
-                                                color: Colors.black,
-                                              ))
-                                            ],
-                                          ),
+                                      SizedBox(width: 126.w,),
+                                      Container(
+                                        height: 36.h,
+                                        width: 64.w,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8.r),
+                                            color: Colors.grey.shade200),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  fav = !fav;
+                                                });
+                                              },
+                                              child: fav
+                                                  ? Icon(Icons
+                                                      .favorite_border_outlined)
+                                                  : Icon(Icons.favorite),
+                                            ),
+                                            Text('34',style: GoogleFonts.roboto(
+                                              color: Colors.black,
+                                            ))
+                                          ],
                                         ),
                                       )
                                     ],
@@ -358,7 +353,7 @@ class _HomeScreenState extends State<HomeScreen>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Top Sellers',style: GoogleFonts.roboto(
+                    Text('Top Sellers'.tr,style: GoogleFonts.roboto(
                       color:
                       Theme.of(context).brightness == Brightness.light
                           ? Colors.black
@@ -367,7 +362,7 @@ class _HomeScreenState extends State<HomeScreen>
                     GestureDetector(
                       onTap: () => Get.to(TopSellersScreen()),
                       child: Row(
-                        children: [Text('See all',style: GoogleFonts.roboto(
+                        children: [Text('See all'.tr,style: GoogleFonts.roboto(
                           color:
                           Theme.of(context).brightness == Brightness.light
                               ? Colors.black
@@ -391,14 +386,14 @@ class _HomeScreenState extends State<HomeScreen>
                       : AppColors.white,
                   tabs: [
                     Tab(
-                      text: '1 day',
+                      text: '1 day'.tr,
 
                     ),
                     Tab(
-                      text: '7 day',
+                      text: '7 day'.tr,
                     ),
                     Tab(
-                      text: '30 day',
+                      text: '30 day'.tr,
                     ),
                   ]),
               SizedBox(
@@ -435,6 +430,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     Padding(
                                       padding: EdgeInsets.only(
                                         left: 16.w,
+                                        right: 16.w
                                       ),
                                       child: Text((index + 1).toString()),
                                     ),
@@ -750,14 +746,14 @@ class _HomeScreenState extends State<HomeScreen>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Collections',style: GoogleFonts.roboto(
+                      Text('Collections'.tr,style: GoogleFonts.roboto(
                         color:
                         Theme.of(context).brightness == Brightness.light
                             ? Colors.black
                             : AppColors.white,
                       )),
                       Row(
-                        children: [Text('See all',style: GoogleFonts.roboto(
+                        children: [Text('See all'.tr,style: GoogleFonts.roboto(
                           color:
                           Theme.of(context).brightness == Brightness.light
                               ? Colors.black
@@ -802,21 +798,12 @@ class _HomeScreenState extends State<HomeScreen>
                                     )),
                                 Positioned(
                                     top: 177.h,
-                                    left: 16.w,
+                                    left: 20.w,
+                                    right: 20.w,
                                     child: Row(
-                                      children: [
-                                        Text('Bored Ape Yacht Club /',style: GoogleFonts.roboto(
-                                          color: Colors.black,
-                                        )),
-                                        Text('2,7K owners',style: GoogleFonts.roboto(
-                                          color: Colors.black,
-                                        )),
-                                      ],
-                                    )),
-                                Positioned(
-                                    top: 177.h,
-                                    left: 16.w,
-                                    child: Row(
+
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         Text('Bored Ape Yacht Club /',style: GoogleFonts.roboto(
                                           color: Colors.black,
@@ -834,7 +821,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(left: 12.w),
-                                        child: Text('Total volume',style: GoogleFonts.roboto(
+                                        child: Text('Total volume'.tr,style: GoogleFonts.roboto(
                                           color: Colors.black,
                                         )),
                                       ),
@@ -860,6 +847,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     ],
                                   ),
                                 ),
+
                                 Positioned(
                                   top: 214.h,
                                   left: 180.w,
@@ -868,7 +856,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.only(left: 12.w),
+                                        padding: EdgeInsets.only(left: 12.w,right: 12.w),
                                         child: Text('Floor',style: GoogleFonts.roboto(
                                           color: Colors.black,
                                         )),

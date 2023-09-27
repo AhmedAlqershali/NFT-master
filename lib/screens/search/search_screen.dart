@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nft/constants/app.colors.dart';
 import 'package:nft/screens/search/search_users_screen.dart';
@@ -73,7 +74,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           child: TextField(
                             controller: _searchController,
                             decoration: InputDecoration(
-                              hintText: 'Search...',
+                              hintText: 'Search...'.tr,
                               // Add a clear button to the search bar
                               suffixIcon: GestureDetector(
                                 onTap: () {},
@@ -167,9 +168,9 @@ class _SearchScreenState extends State<SearchScreen> {
                   : AppColors.white,
               indicatorWeight: 3.w,
               tabs: [
-                RepeatedTab(lable: 'Trending'),
-                RepeatedTab(lable: 'Collections'),
-                RepeatedTab(lable: 'Users'),
+                RepeatedTab(lable: 'Trending'.tr),
+                RepeatedTab(lable: 'Collections'.tr),
+                RepeatedTab(lable: 'Users'.tr),
               ],
             ),
           ),

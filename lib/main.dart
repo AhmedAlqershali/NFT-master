@@ -6,13 +6,16 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:nft/constants/app.theme.dart';
 import 'package:nft/screens/auth/sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'lang/locale.dart';
 import 'lang/locale_controller.dart';
 
 
 // bool darkMode = false;
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   runApp(
     DevicePreview(
@@ -31,15 +34,15 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          Get.put(MyLocaleController());
+          MyLocaleController c= Get.put(MyLocaleController());
           return GetMaterialApp(
             theme: ThemesService().lightTheme,
             darkTheme: ThemesService().darkTheme,
             themeMode: ThemeMode.system,
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
-            // locale: Get.deviceLocale,
-            // translations: MyLocale(),
+            locale: c.intialLang,
+            translations: MyLocale(),
             // home: SplashScreen()
             home: SignIn(),
 

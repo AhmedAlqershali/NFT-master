@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nft/constants/app.colors.dart';
 
@@ -58,7 +59,7 @@ class ContainerSearchUsersWidget extends StatelessWidget {
                     child: Center(
                       child: GestureDetector(
                         child: Text(
-                          'Following',
+                          'Following'.tr,
                           style: GoogleFonts.roboto(fontSize: 16.sp,color: AppColors.purple,fontWeight: FontWeight.w700),
                         ),
                       ),
@@ -67,7 +68,7 @@ class ContainerSearchUsersWidget extends StatelessWidget {
                 ],
               ),
               subtitle: Padding(
-                padding:  EdgeInsets.only(top: 20.0),
+                padding:  EdgeInsets.only(top: 15.0),
                 child: Column(
                   children: [
                     Row(
@@ -79,7 +80,7 @@ class ContainerSearchUsersWidget extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  "Volume (USD)",
+                                  "Volume".tr,
                                   style: GoogleFonts.roboto(fontSize: 12.sp,fontWeight: FontWeight.w500,color: AppColors.grey2),
                                 ),
                                 SizedBox(
@@ -105,7 +106,7 @@ class ContainerSearchUsersWidget extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  "Sales",
+                                  "Sales".tr,
                                   style: GoogleFonts.roboto(fontSize: 12.sp,fontWeight: FontWeight.w500,color: AppColors.grey2),
                                 ),
                                 SizedBox(
@@ -131,7 +132,7 @@ class ContainerSearchUsersWidget extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  "Items",
+                                  "Items".tr,
                                   style: GoogleFonts.roboto(fontSize: 12.sp,fontWeight: FontWeight.w500,color: AppColors.grey2),
                                 ),
                                 SizedBox(
@@ -160,7 +161,7 @@ class ContainerSearchUsersWidget extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  "Followers",
+                                  "Followers".tr,
                                   style: GoogleFonts.roboto(fontSize: 12.sp,fontWeight: FontWeight.w500,color: AppColors.grey2),
                                 ),
                                 SizedBox(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nft/constants/app.colors.dart';
 import 'package:progress_stepper/progress_stepper.dart';
@@ -19,26 +20,10 @@ class _StepperWidgetState extends State<StepperWidget> {
 
 
 
-  // void _incrementCustomStepper() {
-  //   setState(() {
-  //     if (_customCounter < 3) {
-  //       _customCounter++;
-  //
-  //     }
-  //   });
-  // }
-  //
-  // void _decrementCustomStepper() {
-  //   setState(() {
-  //     if (_customCounter > 1) {
-  //       _customCounter--;
-  //     }
-  //   });
-  // }
   List<String> words = ['',
-    'Customers Information',
-    'Delivery Information',
-    'Delivery Information'];
+    'Customers Information'.tr,
+    'Delivery Information'.tr,
+    'Delivery Information'.tr];
 
 
   // واجهة مستخدم مخصصة لعنصر الاختيار
@@ -56,11 +41,11 @@ class _StepperWidgetState extends State<StepperWidget> {
               onChanged(value!);
             },
             activeColor: Theme.of(context).brightness == Brightness.light
-                ? Colors.grey.shade100
-                : AppColors.black,
+                ?AppColors.black
+                :Colors.black ,
             focusColor: Theme.of(context).brightness == Brightness.light
-                ? Colors.grey.shade100
-                : AppColors.black,
+                ?AppColors.black
+                :Colors.black,
           ),
         ],
       ),
@@ -86,16 +71,16 @@ class _StepperWidgetState extends State<StepperWidget> {
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding:  EdgeInsets.all(20.0),
                   child: Text(words[widget.num],style: GoogleFonts.roboto(
                     color: Theme.of(context).brightness == Brightness.light
-                        ? Colors.grey.shade100
-                        : AppColors.black,
+                        ?AppColors.black
+                        :Colors.black ,
                     fontWeight: FontWeight.w700,
                     fontSize: 12.sp
                   ),),
                 ),
-                SizedBox(width: 8,),
+                SizedBox(width: 15,),
                 Expanded(
                   child: customRadioTile(
                     'Option 1',
