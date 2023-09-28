@@ -54,7 +54,7 @@ class EditTextWidget extends StatelessWidget {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide: BorderSide(
-                width: 2.w,
+                width: 1.w,
                 color: Theme.of(context).brightness == Brightness.light
                     ? AppColors.black
                     : AppColors.white,
@@ -63,7 +63,7 @@ class EditTextWidget extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide: BorderSide(
-                width: 2.w,
+                width: 1.w,
                 color: Theme.of(context).brightness == Brightness.light
                     ? AppColors.black
                     : AppColors.white,
@@ -72,14 +72,14 @@ class EditTextWidget extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide: BorderSide(
-                width: 2.w,
+                width: 1.w,
                 color: AppColors.black,
               ),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide: BorderSide(
-                width: 2.w,
+                width: 1.w,
                 color:Theme.of(context).brightness == Brightness.light
                     ? AppColors.black
                     : AppColors.white,

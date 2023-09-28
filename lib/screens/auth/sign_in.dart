@@ -5,11 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nft/api/controller/auth_api_controller.dart';
+import 'package:nft/api/models/process_response.dart';
+import 'package:nft/api/models/user.dart';
 import 'package:nft/constants/app.colors.dart';
-import 'package:nft/constants/app.theme.dart';
 import 'package:nft/screens/auth/sign_up.dart';
 import 'package:nft/screens/bn_screen.dart';
-import 'package:nft/screens/home/home_screen.dart';
+import 'package:nft/utils/context_extension.dart';
 import 'package:nft/widget/button_widget.dart';
 import 'package:nft/widget/edit_text_widget.dart';
 import 'package:nft/widget/icon_button_widget.dart';
@@ -26,6 +28,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   late TextEditingController _phoneTextController;
   late TextEditingController _passwordTextController;
+  late TextEditingController _verificationCodeTextController;
 
   String? _passwordError;
   String? _phoneError;
@@ -38,6 +41,7 @@ class _SignInState extends State<SignIn> {
     super.initState();
     _phoneTextController = TextEditingController();
     _passwordTextController = TextEditingController();
+    _verificationCodeTextController = TextEditingController();
 
     _tapGestureRecognizer = TapGestureRecognizer()..onTap = _navigateToRegister;
     _tapGestureRecognizer2 = TapGestureRecognizer()
@@ -54,6 +58,7 @@ class _SignInState extends State<SignIn> {
   void dispose() {
     _phoneTextController.dispose();
     _passwordTextController.dispose();
+    _verificationCodeTextController.dispose();
     _tapGestureRecognizer.dispose();
     _tapGestureRecognizer2.dispose();
     super.dispose();
@@ -124,7 +129,7 @@ class _SignInState extends State<SignIn> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 25.h, left: 20.w, bottom: 20.h,right: 20.w),
+                    padding: EdgeInsets.only(top: 19.h, left: 20.w, bottom: 20.h,right: 20.w),
                     child: Text(
                       'Log in'.tr,
                       style: GoogleFonts.roboto(
@@ -144,6 +149,7 @@ class _SignInState extends State<SignIn> {
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: TextField(
+                      controller: _passwordTextController,
                       keyboardType: TextInputType.text,
                       obscureText: !_showPassword,
                       expands: false,
@@ -171,7 +177,7 @@ class _SignInState extends State<SignIn> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.r),
                             borderSide: BorderSide(
-                              width: 2.w,
+                              width: 1.w,
                               color:
                               Theme.of(context).brightness == Brightness.light
                                   ? AppColors.black
@@ -197,7 +203,7 @@ class _SignInState extends State<SignIn> {
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.r),
                             borderSide: BorderSide(
-                              width: 2.w,
+                              width: 1.w,
                               color:
                               Theme.of(context).brightness == Brightness.light
                                   ? AppColors.black
@@ -207,7 +213,7 @@ class _SignInState extends State<SignIn> {
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.r),
                             borderSide: BorderSide(
-                              width: 2.w,
+                              width: 1.w,
                               color:
                               Theme.of(context).brightness == Brightness.light
                                   ? AppColors.black
@@ -217,8 +223,59 @@ class _SignInState extends State<SignIn> {
                           errorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.r),
                             borderSide: BorderSide(
-                              width: 2.w,
+                              width: 1.w,
                               color: AppColors.red,
+                            ),
+                          )),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextField(
+                      controller: _verificationCodeTextController,
+                      keyboardType: TextInputType.text,
+                      expands: false,
+                      decoration: InputDecoration(
+                          hintText: 'ABC',
+                          label: SizedBox(
+                            width: 120.w,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Refferal ID:'),
+                              ],
+                            ),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                            borderSide: BorderSide(
+                              width: 1.w,
+                              color: Theme.of(context).brightness == Brightness.light
+                                  ? AppColors.black
+                                  : AppColors.white,                        ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                            borderSide: BorderSide(
+                              width: 1.w,
+                              color: Theme.of(context).brightness == Brightness.light
+                                  ? AppColors.black
+                                  : AppColors.white,                        ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                            borderSide: BorderSide(
+                              width: 1.w,
+                              color: Theme.of(context).brightness == Brightness.light
+                                  ? AppColors.black
+                                  : AppColors.white,                        ),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                            borderSide: BorderSide(
+                              width: 1.w,
+                              color: Colors.red,
                             ),
                           )),
                     ),
@@ -251,14 +308,14 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   SizedBox(
-                    height: 25.h,
+                    height: 20.h,
                   ),
                   ButtonWidget(
                     name: 'Log in'.tr,
-                    onPressed: () => Get.offAll(BnScreen()),
+                    onPressed: () =>_performLogin() ,
                   ),
                   SizedBox(
-                    height: 25.h,
+                    height: 20.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -285,7 +342,7 @@ class _SignInState extends State<SignIn> {
                     ],
                   ),
                   SizedBox(
-                    height: 35.h,
+                    height: 20.h,
                   ),
                   Center(
                     child: RichText(
@@ -314,5 +371,34 @@ class _SignInState extends State<SignIn> {
             ),
             ),
         );
+
+
+  }
+
+  void _performLogin() {
+    if (_checkData()) {
+      _login();
+    }
+  }
+
+  bool _checkData() {
+    _controlErrors();
+    if (_phoneTextController.text.isNotEmpty &&
+        _passwordTextController.text.isNotEmpty) {
+      return true;
+    }
+    context.showSnackBar(message: "Insert required data", erorr: true);
+    return false;
+  }
+
+  void _controlErrors() {}
+
+  void _login() async {
+    ProcessResponse processResponse = await AuthApiController()
+        .login(_phoneTextController.text, _passwordTextController.text,_verificationCodeTextController.text);
+    if (processResponse.success) {
+      Get.offAll(BnScreen());
+    }
+    context.showSnackBar(message: processResponse.message, erorr: !processResponse.success);
     }
 }

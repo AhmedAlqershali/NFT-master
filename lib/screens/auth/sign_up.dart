@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nft/api/controller/auth_api_controller.dart';
+import 'package:nft/api/models/process_response.dart';
+import 'package:nft/api/models/user.dart';
 import 'package:nft/constants/app.colors.dart';
 import 'package:nft/screens/auth/sign_in.dart';
+import 'package:nft/utils/context_extension.dart';
 import 'package:nft/widget/button_widget.dart';
 import 'package:nft/widget/icon_button_widget.dart';
 
@@ -65,6 +69,7 @@ class _SignUPState extends State<SignUp> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: TextField(
+                  controller: _phoneTextController,
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                       label: SizedBox(
@@ -117,6 +122,7 @@ class _SignUPState extends State<SignUp> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: TextField(
+                  controller: _passwordTextController,
                   keyboardType: TextInputType.text,
                   obscureText: !_showPassword,
                   expands: false,
@@ -181,59 +187,6 @@ class _SignUPState extends State<SignUp> {
                       )),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: TextField(
-                  enabled: false,
-                  keyboardType: TextInputType.text,
-                  obscureText: !_showPassword,
-                  expands: false,
-                  decoration: InputDecoration(
-                      hintText: 'ABC',
-                      errorText: _passwordError,
-                      label: SizedBox(
-                        width: 120.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Refferal ID:'),
-                          ],
-                        ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.r),
-                        borderSide: BorderSide(
-                          width: 2.w,
-                          color: Theme.of(context).brightness == Brightness.light
-                              ? AppColors.black
-                              : AppColors.white,                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.r),
-                        borderSide: BorderSide(
-                          width: 2.w,
-                          color: Theme.of(context).brightness == Brightness.light
-                              ? AppColors.black
-                              : AppColors.white,                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.r),
-                        borderSide: BorderSide(
-                          width: 2.w,
-                          color: Theme.of(context).brightness == Brightness.light
-                              ? AppColors.black
-                              : AppColors.white,                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.r),
-                        borderSide: BorderSide(
-                          width: 2.w,
-                          color: Colors.red,
-                        ),
-                      )),
-                ),
-              ),
               Row(
                 children: [
                   Checkbox(
@@ -255,11 +208,47 @@ class _SignUPState extends State<SignUp> {
               ),
               ButtonWidget(
                   name: 'Create personal account',
-                  onPressed: () => Get.to(SignIn())),
+                  onPressed: () =>_performRegister() ),
             ],
           ),
         ),
       ),
     );
   }
+  Future<void> _performRegister() async {
+    if (_checkData()) {
+      await _register();
+    }
+  }
+
+  bool _checkData() {
+    _controlErrors();
+    if (_phoneTextController.text.isNotEmpty &&
+        _passwordTextController.text.isNotEmpty) {
+      return true;
+    }
+    context.showSnackBar(
+        message: "Insert required data", erorr: true);
+    return false;
+  }
+
+  void _controlErrors() {}
+
+  Future<void> _register() async {
+    ProcessResponse processResponse = await AuthApiController()
+        .register(user);
+    if (processResponse.success) {
+      Get.back();
+    }
+    print(user);
+    context.showSnackBar(message: processResponse.message, erorr: !processResponse.success);
+  }
+
+  User get user {
+    User user = User();
+    user.phoneNumber = _phoneTextController.text;
+    user.password = _passwordTextController.text;
+    return user;
+    }
 }
+
