@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nft/constants/app.colors.dart';
+import 'package:nft/controller/services/get_all_favorite.dart';
+import 'package:nft/prefs/shared_pref_controller.dart';
 import 'package:nft/screens/product_page/product_page_screen.dart';
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -11,11 +13,24 @@ class FavoritesScreen extends StatefulWidget {
   State<FavoritesScreen> createState() => _FavoritesScreenState();
 }
 
+
+
 class _FavoritesScreenState extends State<FavoritesScreen> {
   int _counter=0;
   String _content = 'Hi';
   bool isfav=true;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    // AllFavoriteProductsService().AddFavoriteProducts(SharedPrefController().getuser().userId!);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      AllFavoriteProductsService().getFavoriteProducts();
+    });
+
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nft/constants/app.colors.dart';
-import 'package:nft/widget/button_widget.dart';
+
+import '../controller/controller_model/collections.dart';
 
 class ContainerSearchCollectionsGridViewWidget extends StatelessWidget {
 
 
   ContainerSearchCollectionsGridViewWidget({
     super.key,
+    required this.collections,
+
   });
+  Collections collections;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +34,9 @@ class ContainerSearchCollectionsGridViewWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.r),
                   image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage("assets/images/product1.png"),
-                ),
+                    fit: BoxFit.cover,
+                    image: AssetImage(collections.imagePath!),
+                  ),
                 ),
               ),
               Padding(
@@ -50,7 +54,7 @@ class ContainerSearchCollectionsGridViewWidget extends StatelessWidget {
                             width: 20.w,
                           ),
                           SizedBox(width: 8.w,),
-                          Text('Bored Ape Yacht Club /',style: GoogleFonts.roboto(fontSize: 14.sp,fontWeight: FontWeight.w400)),
+                          Text('${collections.name} /',style: GoogleFonts.roboto(fontSize: 14.sp,fontWeight: FontWeight.w400)),
                           SizedBox(width: 4.w,),
                           Text('34,7K owners',style: GoogleFonts.roboto(fontSize: 12.sp,fontWeight: FontWeight.w400,color: AppColors.grey2),),
                         ],
@@ -63,22 +67,22 @@ class ContainerSearchCollectionsGridViewWidget extends StatelessWidget {
                         SizedBox(width: 25.w,),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                     children: [
-                       Text('Total voume',style: GoogleFonts.roboto(fontSize: 12.sp,fontWeight: FontWeight.w400,color: AppColors.grey2),),
-                       SizedBox(width: 8.w,),
+                          children: [
+                            Text('Total voume',style: GoogleFonts.roboto(fontSize: 12.sp,fontWeight: FontWeight.w400,color: AppColors.grey2),),
+                            SizedBox(width: 8.w,),
 
-                       Row(
-                       children: [
-                         Image.asset('assets/images/coin.png',
-                           height: 18.h,
-                           width: 18.w,),
-                         SizedBox(width: 4.w,),
-                         Text('795,6K BNB',style: GoogleFonts.roboto(fontSize: 16.sp,fontWeight: FontWeight.w400)),
+                            Row(
+                              children: [
+                                Image.asset('assets/images/coin.png',
+                                  height: 18.h,
+                                  width: 18.w,),
+                                SizedBox(width: 4.w,),
+                                Text('${collections.productsCount}K BNB',style: GoogleFonts.roboto(fontSize: 16.sp,fontWeight: FontWeight.w400)),
 
-                       ],
-                     )
-                     ],
-                   ),
+                              ],
+                            )
+                          ],
+                        ),
                         SizedBox(width: 25.w,),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -97,9 +101,6 @@ class ContainerSearchCollectionsGridViewWidget extends StatelessWidget {
                             ),
                           ],
                         )
-
-
-
                       ],
                     ),
                   ],

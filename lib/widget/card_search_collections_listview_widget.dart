@@ -3,12 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constants/app.colors.dart';
+import '../controller/controller_model/collections.dart';
 
 class ContainerSearchCollectionsListViewWidget extends StatelessWidget {
 
   ContainerSearchCollectionsListViewWidget({
+    required this.collections,
     super.key,
   });
+  Collections collections;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +22,9 @@ class ContainerSearchCollectionsListViewWidget extends StatelessWidget {
         width: 366.w,
         height: 359.h,
         child: Card(
-          color:  Theme.of(context).brightness == Brightness.light
-              ? Colors.white
-              : AppColors.black,
+            color:  Theme.of(context).brightness == Brightness.light
+                ? Colors.white
+                : AppColors.black,
             elevation: 10.0,
             clipBehavior: Clip.antiAliasWithSaveLayer,
             shape: RoundedRectangleBorder(
@@ -38,7 +41,7 @@ class ContainerSearchCollectionsListViewWidget extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(10.r)),
                       ),
                       child: Ink.image(
-                        image: AssetImage('assets/images/product1.png'),
+                        image: NetworkImage(collections.imagePath!),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -52,7 +55,7 @@ class ContainerSearchCollectionsListViewWidget extends StatelessWidget {
                               SizedBox(
                                 width: 8.w,
                               ),
-                              Text('Bored Ape Yacht Club /',
+                              Text('${collections.name} /',
                                   style: GoogleFonts.roboto(
                                       fontSize: 18.sp, fontWeight: FontWeight.w400)),
                               SizedBox(
@@ -94,7 +97,7 @@ class ContainerSearchCollectionsListViewWidget extends StatelessWidget {
                                         width: 18.w,
                                       ),
                                       SizedBox(width: 8.w,),
-                                      Text('795,6K BNB',
+                                      Text('${collections.productsCount}K BNB',
                                           style: GoogleFonts.roboto(
                                               fontSize: 20.sp,
                                               fontWeight: FontWeight.w400)),

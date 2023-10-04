@@ -5,7 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:nft/constants/app.theme.dart';
+import 'package:nft/prefs/shared_pref_controller.dart';
 import 'package:nft/screens/auth/sign_in.dart';
+import 'package:nft/screens/auth/sign_up.dart';
+import 'package:nft/screens/bn_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'lang/locale.dart';
@@ -16,6 +19,7 @@ import 'lang/locale_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefController().initPreferences();
   await GetStorage.init();
   runApp(
     DevicePreview(
@@ -43,8 +47,8 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             locale: c.intialLang,
             translations: MyLocale(),
-            // home: SplashScreen()
-            home: SignIn(),
+            // home: const SignIn(),
+            home: const SignIn(),
 
           );
           });

@@ -51,7 +51,9 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: Theme.of(context).brightness == Brightness.light
+          ? AppColors.white
+          : AppColors.black,
       resizeToAvoidBottomInset: false,
 
       appBar: AppBar(
@@ -119,9 +121,13 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
             Text(
               'Edit details',
               style: GoogleFonts.roboto(
-                  color: Colors.black,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? AppColors.black
+                      : AppColors.white,
                   fontWeight: FontWeight.w700,
-                  fontSize: 20.sp),
+                  fontSize: 20.sp,
+
+              ),
             ),
             SizedBox(
               height: 24.h,

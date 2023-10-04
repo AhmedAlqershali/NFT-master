@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nft/widget/button_widget.dart';
 
 import '../constants/app.colors.dart';
+import '../controller/controller_model/create_products_model.dart';
 
 class ContainerSearchTrendingGridViewWidget extends StatelessWidget {
 
   ContainerSearchTrendingGridViewWidget({
+    required this.productsModel,
     super.key,
   });
+  CreateProductsModel productsModel;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +23,9 @@ class ContainerSearchTrendingGridViewWidget extends StatelessWidget {
             height: 277.h,
             width: 178.w,
             child: Card(
-              color: Theme.of(context).brightness == Brightness.light
-                  ? Colors.white
-                  : AppColors.black,
+                color: Theme.of(context).brightness == Brightness.light
+                    ? Colors.white
+                    : AppColors.black,
                 elevation: 10.0,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 shape: RoundedRectangleBorder(
@@ -39,11 +41,11 @@ class ContainerSearchTrendingGridViewWidget extends StatelessWidget {
                       ),
                       child: Padding(
                         padding:
-                         EdgeInsets.only(top: 10.h, right: 4.w, left: 4.w),
+                        EdgeInsets.only(top: 10.h, right: 4.w, left: 4.w),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10.r),
-                          child: Image.asset('assets/images/product1.png',
-                          fit: BoxFit.cover),
+                          child: Image.network(productsModel.productPath!,
+                              fit: BoxFit.cover),
                         ),
                       ),
                     ),
@@ -52,7 +54,7 @@ class ContainerSearchTrendingGridViewWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Deadzone 13 Hideout',
+                          Text(productsModel.name!,
                               style: GoogleFonts.roboto(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w400)),
@@ -65,12 +67,12 @@ class ContainerSearchTrendingGridViewWidget extends StatelessWidget {
                                   height: 20.h,
                                   child: CircleAvatar(
                                     radius: 20.r,
-                                    child: Image.asset('assets/images/img_profile.png'),
+                                    child: Image.network(productsModel.subImagePath!),
                                   ),),
                                 SizedBox(
                                   width: 8.w,
                                 ),
-                                Text('@marterium',
+                                Text('@${productsModel.name}',
                                     style: GoogleFonts.roboto(
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.w400,
@@ -96,7 +98,7 @@ class ContainerSearchTrendingGridViewWidget extends StatelessWidget {
                                       style: GoogleFonts.roboto(
                                           fontSize: 16.sp,
                                           fontWeight: FontWeight.w400)),
-                                  Text('≈ \$140.05',
+                                  Text('≈ \$${productsModel.price}',
                                       style: GoogleFonts.roboto(
                                           fontSize: 12.sp,
                                           fontWeight: FontWeight.w400,

@@ -5,16 +5,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nft/api/controller/auth_api_controller.dart';
-import 'package:nft/api/models/process_response.dart';
-import 'package:nft/api/models/user.dart';
+
 import 'package:nft/constants/app.colors.dart';
+import 'package:nft/controller/getx_controller/get_login_controller.dart';
 import 'package:nft/screens/auth/sign_up.dart';
 import 'package:nft/screens/bn_screen.dart';
 import 'package:nft/utils/context_extension.dart';
 import 'package:nft/widget/button_widget.dart';
 import 'package:nft/widget/edit_text_widget.dart';
 import 'package:nft/widget/icon_button_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../lang/locale_controller.dart';
 
@@ -36,6 +36,21 @@ class _SignInState extends State<SignIn> {
   late TapGestureRecognizer _tapGestureRecognizer;
   late TapGestureRecognizer _tapGestureRecognizer2;
 
+  static RxBool isLightTheme = false.obs;
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  _saveThemeStatus() async {
+    SharedPreferences pref = await _prefs;
+    pref.setBool('theme', isLightTheme.value);
+  }
+
+  _getThemeStatus() async {
+    var _isLight = _prefs.then((SharedPreferences prefs) {
+      return prefs.getBool('theme') != null ? prefs.getBool('theme') : true;
+    }).obs;
+    isLightTheme.value = (await _isLight.value)!;
+    Get.changeThemeMode(isLightTheme.value ? ThemeMode.light : ThemeMode.dark);
+  }
   @override
   void initState() {
     super.initState();
@@ -47,6 +62,8 @@ class _SignInState extends State<SignIn> {
     _tapGestureRecognizer2 = TapGestureRecognizer()
       ..onTap = _navigateToRegister2;
     // _tapGestureRecognizer.onTap = _navigateToRegister;
+    _getThemeStatus();
+
   }
 
   void _navigateToRegister() =>
@@ -88,6 +105,7 @@ class _SignInState extends State<SignIn> {
                   Get.changeThemeMode(
                     isLightTheme.value ? ThemeMode.light : ThemeMode.dark,);
                   isLightTheme = true.obs;
+                  _saveThemeStatus();
                 },
               ),
               actions: [
@@ -140,146 +158,159 @@ class _SignInState extends State<SignIn> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  EditTextWidget(
-                    star: '*',
-                    controller: _phoneTextController,
-                    name: 'Phone number'.tr,
-                    size: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: TextField(
-                      controller: _passwordTextController,
-                      keyboardType: TextInputType.text,
-                      obscureText: !_showPassword,
-                      expands: false,
-                      decoration: InputDecoration(
-                          errorText: _passwordError,
-                          label: SizedBox(
-                            width: 120.w,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Password'.tr),
-                                Text(
-                                  " *",
-                                  style: TextStyle(
-                                    color: Theme.of(context).brightness ==
-                                        Brightness.light
-                                        ? AppColors.black
-                                        : AppColors.white,
+
+                  GetBuilder<GetLoginController>(
+                    init: GetLoginController(),
+                    builder: (controller){
+                      return Column(
+                        children: [
+                          EditTextWidget(
+                            star: '*',
+                            controller: controller.phoneNumberController,
+                            name: 'Phone number'.tr,
+                            size: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: TextField(
+                              controller: controller.passwordController,
+                              keyboardType: TextInputType.text,
+                              obscureText: !_showPassword,
+                              expands: false,
+                              decoration: InputDecoration(
+                                  errorText: _passwordError,
+                                  label: SizedBox(
+                                    width: 120.w,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text('Password'.tr),
+                                        Text(
+                                          " *",
+                                          style: TextStyle(
+                                            color: Theme.of(context).brightness ==
+                                                Brightness.light
+                                                ? AppColors.black
+                                                : AppColors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    borderSide: BorderSide(
+                                      width: 1.w,
+                                      color:
+                                      Theme.of(context).brightness == Brightness.light
+                                          ? AppColors.black
+                                          : AppColors.white,
+                                    ),
+                                  ),
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _showPassword = !_showPassword;
+                                      });
+                                    },
+                                    icon: Icon(
+                                      _showPassword
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      color:
+                                      Theme.of(context).brightness == Brightness.light
+                                          ? AppColors.black
+                                          : AppColors.white,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    borderSide: BorderSide(
+                                      width: 1.w,
+                                      color:
+                                      Theme.of(context).brightness == Brightness.light
+                                          ? AppColors.black
+                                          : AppColors.white,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    borderSide: BorderSide(
+                                      width: 1.w,
+                                      color:
+                                      Theme.of(context).brightness == Brightness.light
+                                          ? AppColors.black
+                                          : AppColors.white,
+                                    ),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    borderSide: BorderSide(
+                                      width: 1.w,
+                                      color: AppColors.red,
+                                    ),
+                                  )),
                             ),
                           ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            borderSide: BorderSide(
-                              width: 1.w,
-                              color:
-                              Theme.of(context).brightness == Brightness.light
-                                  ? AppColors.black
-                                  : AppColors.white,
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: TextField(
+                              controller: controller.verificationCodeController,
+                              keyboardType: TextInputType.text,
+                              expands: false,
+                              decoration: InputDecoration(
+                                  hintText: 'ABC',
+                                  label: SizedBox(
+                                    width: 120.w,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text('Refferal ID:'),
+                                      ],
+                                    ),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    borderSide: BorderSide(
+                                      width: 1.w,
+                                      color: Theme.of(context).brightness == Brightness.light
+                                          ? AppColors.black
+                                          : AppColors.white,                        ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    borderSide: BorderSide(
+                                      width: 1.w,
+                                      color: Theme.of(context).brightness == Brightness.light
+                                          ? AppColors.black
+                                          : AppColors.white,                        ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    borderSide: BorderSide(
+                                      width: 1.w,
+                                      color: Theme.of(context).brightness == Brightness.light
+                                          ? AppColors.black
+                                          : AppColors.white,                        ),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    borderSide: BorderSide(
+                                      width: 1.w,
+                                      color: Colors.red,
+                                    ),
+                                  )),
                             ),
                           ),
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _showPassword = !_showPassword;
-                              });
-                            },
-                            icon: Icon(
-                              _showPassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color:
-                              Theme.of(context).brightness == Brightness.light
-                                  ? AppColors.black
-                                  : AppColors.white,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            borderSide: BorderSide(
-                              width: 1.w,
-                              color:
-                              Theme.of(context).brightness == Brightness.light
-                                  ? AppColors.black
-                                  : AppColors.white,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            borderSide: BorderSide(
-                              width: 1.w,
-                              color:
-                              Theme.of(context).brightness == Brightness.light
-                                  ? AppColors.black
-                                  : AppColors.white,
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            borderSide: BorderSide(
-                              width: 1.w,
-                              color: AppColors.red,
-                            ),
-                          )),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: TextField(
-                      controller: _verificationCodeTextController,
-                      keyboardType: TextInputType.text,
-                      expands: false,
-                      decoration: InputDecoration(
-                          hintText: 'ABC',
-                          label: SizedBox(
-                            width: 120.w,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Refferal ID:'),
-                              ],
-                            ),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            borderSide: BorderSide(
-                              width: 1.w,
-                              color: Theme.of(context).brightness == Brightness.light
-                                  ? AppColors.black
-                                  : AppColors.white,                        ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            borderSide: BorderSide(
-                              width: 1.w,
-                              color: Theme.of(context).brightness == Brightness.light
-                                  ? AppColors.black
-                                  : AppColors.white,                        ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            borderSide: BorderSide(
-                              width: 1.w,
-                              color: Theme.of(context).brightness == Brightness.light
-                                  ? AppColors.black
-                                  : AppColors.white,                        ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            borderSide: BorderSide(
-                              width: 1.w,
-                              color: Colors.red,
-                            ),
-                          )),
-                    ),
-                  ),
+                        ],
+                      );
+                    },),
+
+
+
+
                   Padding(
                     padding: EdgeInsets.only(top: 5.h, left: 20.w,right: 20.w),
                     child: RichText(
@@ -310,10 +341,16 @@ class _SignInState extends State<SignIn> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  ButtonWidget(
-                    name: 'Log in'.tr,
-                    onPressed: () =>_performLogin() ,
-                  ),
+                  GetBuilder<GetLoginController>(
+                      init: GetLoginController(),
+                      builder: (controller){
+                    return ButtonWidget(
+                      name: 'Log in'.tr,
+                      onPressed: ()=>controller.loginUser(),
+                    );
+                  }),
+
+
                   SizedBox(
                     height: 20.h,
                   ),
@@ -375,30 +412,6 @@ class _SignInState extends State<SignIn> {
 
   }
 
-  void _performLogin() {
-    if (_checkData()) {
-      _login();
-    }
-  }
 
-  bool _checkData() {
-    _controlErrors();
-    if (_phoneTextController.text.isNotEmpty &&
-        _passwordTextController.text.isNotEmpty) {
-      return true;
-    }
-    context.showSnackBar(message: "Insert required data", erorr: true);
-    return false;
-  }
 
-  void _controlErrors() {}
-
-  void _login() async {
-    ProcessResponse processResponse = await AuthApiController()
-        .login(_phoneTextController.text, _passwordTextController.text,_verificationCodeTextController.text);
-    if (processResponse.success) {
-      Get.offAll(BnScreen());
-    }
-    context.showSnackBar(message: processResponse.message, erorr: !processResponse.success);
-    }
 }

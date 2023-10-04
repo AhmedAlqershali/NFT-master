@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../constants/app.colors.dart';
+import '../controller/controller_model/create_products_model.dart';
 
 class ContainerSearchTrendingListViewWidget extends StatelessWidget {
 
   ContainerSearchTrendingListViewWidget({
+    required this.productsModel,
     super.key,
   });
+  CreateProductsModel productsModel;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +22,9 @@ class ContainerSearchTrendingListViewWidget extends StatelessWidget {
             width: 366.w,
             height: 503.h,
             child: Card(
-              color:  Theme.of(context).brightness == Brightness.light
-                  ? Colors.white
-                  : AppColors.black,
+                color:  Theme.of(context).brightness == Brightness.light
+                    ? Colors.white
+                    : AppColors.black,
                 elevation: 10.0,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 shape: RoundedRectangleBorder(
@@ -37,9 +40,9 @@ class ContainerSearchTrendingListViewWidget extends StatelessWidget {
                       ),
                       child: Padding(
                         padding:
-                             EdgeInsets.only(top: 16.h, right: 16.w, left: 16.h),
+                        EdgeInsets.only(top: 16.h, right: 16.w, left: 16.h),
                         child: Ink.image(
-                          image: AssetImage('assets/images/product1.png'),
+                          image: NetworkImage(productsModel.productPath!),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -50,7 +53,7 @@ class ContainerSearchTrendingListViewWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Deadzone 13 Hideout',
+                          Text(productsModel.name!,
                               style: GoogleFonts.roboto(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.w400)),
@@ -64,12 +67,12 @@ class ContainerSearchTrendingListViewWidget extends StatelessWidget {
                                 height: 30.h,
                                 child: CircleAvatar(
                                   radius: 20.r,
-                                  child: Image.asset('assets/images/img_profile.png'),
+                                  child: Image.network(productsModel.subImagePath!),
                                 ),),
                               SizedBox(
                                 width: 8.w,
                               ),
-                              Text('@marterium',
+                              Text('@${productsModel.name}',
                                   style: GoogleFonts.roboto(
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
@@ -99,7 +102,7 @@ class ContainerSearchTrendingListViewWidget extends StatelessWidget {
                                             style: GoogleFonts.roboto(
                                                 fontSize: 20.sp,
                                                 fontWeight: FontWeight.w400)),
-                                        Text('≈ \$140.05',
+                                        Text('≈ \$${productsModel.price}',
                                             style: GoogleFonts.roboto(
                                                 fontSize: 14.sp,
                                                 fontWeight: FontWeight.w400,

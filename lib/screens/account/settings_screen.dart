@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nft/constants/app.colors.dart';
 import 'package:nft/constants/app.theme.dart';
+import 'package:nft/controller/getx_controller/get_delete_controller.dart';
 import 'package:nft/lang/locale_controller.dart';
+import 'package:nft/screens/account/edit_details_screen.dart';
+import 'package:nft/screens/auth/sign_in.dart';
 import 'package:nft/widget/card_setting_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -37,7 +40,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     isLightTheme.value = (await _isLight.value)!;
     Get.changeThemeMode(isLightTheme.value ? ThemeMode.light : ThemeMode.dark);
   }
-
+  @override
+  void initState() {
+    super.initState();
+    _getThemeStatus();
+    }
 
 
   @override
@@ -143,7 +150,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     height: 24.h,
                   ),
                   CardSettingWidget(
-                      onPressed: () {},
+                      onPressed: ()=>Get.to(EditDetailsScreen()),
                       // onPressed: () => Get.to(EditDetailsScreen()),
                       icon: Icons.edit_outlined,
                       name: 'Change my details'.tr),
@@ -298,10 +305,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  CardSettingWidget(
-                      onPressed: () {},
-                      icon: Icons.delete_outline_outlined,
-                      name: 'Delete account'.tr),
+                  GetBuilder<GetDeleteController>(
+                      init: GetDeleteController(),
+                      builder: (controller){
+                    return CardSettingWidget(
+                        onPressed: ()async {
+                          setState(() {
+                            controller.deleteAccount();
+                          });
+                          await Get.offAll(SignIn());
+
+                        },
+                        icon: Icons.delete_outline_outlined,
+                        name: 'Delete account'.tr);
+                  }),
                   SizedBox(
                     height: 10.h,
                   ),

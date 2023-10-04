@@ -1,6 +1,9 @@
+import 'dart:convert';
+import 'dart:ffi';
+
+import 'package:nft/controller/controller_model/users_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../api/models/user.dart';
 
 enum PrefKeys { loggedIn, id, fullName, email, token, isActive }
 
@@ -19,20 +22,36 @@ class SharedPrefController {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  Future<void> save(User user) async {
-    await _sharedPreferences.setBool(PrefKeys.loggedIn.name, true);
-    await _sharedPreferences.setInt(PrefKeys.id.name, user.id);
-    // await _sharedPreferences.setString(PrefKeys.fullName.name, user.fullName);
-    // await _sharedPreferences.setString(PrefKeys.email.name, user.email);
-    await _sharedPreferences.setString(
-        PrefKeys.token.name, "Bearer ${user.token}");
+  Future<bool> save(UsersModel user) async {
+    // await _sharedPreferences.setBool(PrefKeys.loggedIn.name, true);
+    // await _sharedPreferences.setString(PrefKeys.id.name, user.userId!);
+    //  await _sharedPreferences.setString(PrefKeys.fullName.name, user.fullName!);
+    // // await _sharedPreferences.setString(PrefKeys.email.name, user.email);
+    // await _sharedPreferences.setString(
+    //     PrefKeys.token.name, "Bearer ${user.token!}");
+    String userJson=jsonEncode(user);
+    return _sharedPreferences.setString('user', userJson);
   }
+
+  UsersModel getuser() {
+    String? user=_sharedPreferences.getString('user');
+    if(user != null){
+      var map =jsonDecode(_sharedPreferences.getString('user')!);
+      return UsersModel.fromJson(map);
+    }
+    return UsersModel();
+}
+
+
 
   T? getValue<T>(String key) {
     if (_sharedPreferences.containsKey(key)) {
       return _sharedPreferences.get(key) as T?;
     }
     return null;
+  }
+  T? getValueFor<T>({required String key}) {
+    return _sharedPreferences.get(key) as T?;
   }
 
   Future<void> setValue<T>(String key, dynamic value) async {

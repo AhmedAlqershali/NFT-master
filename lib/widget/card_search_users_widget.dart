@@ -4,15 +4,18 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nft/constants/app.colors.dart';
 
+import '../controller/controller_model/users_model.dart';
+
 class ContainerSearchUsersWidget extends StatelessWidget {
 
   String num;
 
   ContainerSearchUsersWidget({
     super.key,
-
     required this.num,
+    required this.users,
   });
+  UsersModel users;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +49,7 @@ class ContainerSearchUsersWidget extends StatelessWidget {
                         height: 44.h,
                         width: 44.w,
                       ),
-                      Text("@Marteriu",style: GoogleFonts.roboto(fontSize: 14.sp,fontWeight: FontWeight.w700,)),
+                      Text("@${users.fullName}",style: GoogleFonts.roboto(fontSize: 14.sp,fontWeight: FontWeight.w700,)),
                     ],
                   ),
                   Container(
@@ -92,7 +95,7 @@ class ContainerSearchUsersWidget extends StatelessWidget {
                             SizedBox(height: 10.h,),
 
                             Text(
-                              "15,085,035.95",
+                              "${users.cartID}",
                               style: GoogleFonts.roboto(fontSize: 16.sp,fontWeight: FontWeight.w400,color:
                               Theme.of(context).brightness == Brightness.light
                                   ? AppColors.black2
@@ -118,7 +121,7 @@ class ContainerSearchUsersWidget extends StatelessWidget {
                             SizedBox(height: 10.h,),
 
                             Text(
-                              "111,850",
+                              "${users.sales}",
                               style: GoogleFonts.roboto(fontSize: 16.sp,fontWeight: FontWeight.w400,color:
                               Theme.of(context).brightness == Brightness.light
                                   ? AppColors.black2
@@ -144,7 +147,7 @@ class ContainerSearchUsersWidget extends StatelessWidget {
                             SizedBox(height: 10.h,),
 
                             Text(
-                              "50,850",
+                              "${users.products}",
                               style: GoogleFonts.roboto(fontSize: 16.sp,fontWeight: FontWeight.w400,color:
                               Theme.of(context).brightness == Brightness.light
                                   ? AppColors.black2
@@ -173,7 +176,7 @@ class ContainerSearchUsersWidget extends StatelessWidget {
                             SizedBox(height: 10.h,),
 
                             Text(
-                              "10,150",
+                              "${users.followers}",
                               style: GoogleFonts.roboto(fontSize: 16.sp,fontWeight: FontWeight.w400,color:
                               Theme.of(context).brightness == Brightness.light
                                   ? AppColors.black2
